@@ -11,7 +11,7 @@ export default function userSchema(req,res,next){
     name: joi.string().required(),
     email: joi.string().email().required(),
     password: joi.string().required(),
-    confirm_password: joi.ref('password').required()
+    confirm_password: joi.string().valid(joi.ref('password')).required(),
   })
 
   try {
