@@ -4,6 +4,7 @@ import postUrl from '../controllers/urlControllers/postUrl.js';
 import getById from '../controllers/urlControllers/getById.js';
 import redirectById from '../controllers/urlControllers/redirectById.js';
 import deleteById from '../controllers/urlControllers/deleteById.js';
+import getsByUserId from '../controllers/urlControllers/getsByUserId.js';
 
 const router = Router();
 
@@ -19,5 +20,7 @@ router.get('/urls/open/:shortUrl', redirectById)
 //deletes a shorturl link
 router.delete('/urls/:id', authUrl, deleteById)
 
+// gets all short urls of a userId
+router.get('/users/me', authUrl, getsByUserId)
 
 export default router;
