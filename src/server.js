@@ -2,6 +2,7 @@ import express from 'express'
 import cors from 'cors'
 import dotenv from 'dotenv'
 import userRoute from '../src/routes/userRoute.js'
+import urlRoute from '../src/routes/urlRoute.js'
 
 
 const app = express();
@@ -13,6 +14,7 @@ dotenv.config();
 
 //ROUTES
 app.use(userRoute);
+app.use(urlRoute);
 
 
 app.listen(PORT, () => {
