@@ -4,5 +4,5 @@ CREATE TABLE "shortUrl"(
   "url" TEXT NOT NULL,
   "shortUrl" TEXT NOT NULL,
   "visitCount" INTEGER,
-  "createdAt" TIMESTAMP NOT NULL
+  "createdAt" DATE NOT NULL DEFAULT CURRENT_DATE
 );
