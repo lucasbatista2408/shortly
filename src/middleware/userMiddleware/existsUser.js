@@ -10,7 +10,7 @@ export default async function existsUser(req,res,next){
 
     const {rowCount: checkEmail} = await client.query(existsUserQuery, values);
 
-    checkEmail > 0 ? res.sendStatus(409) : next()
+    checkEmail === 0 ? res.sendStatus(409) : next()
 
   } catch (error) {
     console.error(error)

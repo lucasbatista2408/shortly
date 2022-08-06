@@ -1,8 +1,11 @@
 import client from "../../../database/database.js";
 import bcrypt from "bcrypt";
-import { v4 as uuid } from 'uuid';
+import jwt from "jsonwebtoken";
+import dotenv from "dotenv";
 
-import { signInUserQuery, sessionQuery } from "../../../Queries/userQueries.js";
+import { signInUserQuery } from "../../../Queries/userQueries.js";
+
+dotenv.config();
 
 
 export default async function signInUser(req,res){
@@ -16,18 +19,12 @@ export default async function signInUser(req,res){
 
   try {
     if(user && bcrypt.compareSync(password, user[0].password)) {
-      const session = uuid();
 
-      const valueSession = [user[0].id, session]
-      
-      try {
-        await client.query(sessionQuery, valueSession)
+      const access_key = process.env.ACCESS_TOKEN_KEY
 
-        res.status(200).send(session)
-      } catch (error) {
-        console.error(error)
-        res.sendStatus(500)
-      }
+      const token = jwt.sign(user[0].id, access_key)
+
+      res.status(200).send(token)
     }else {
       return res.sendStatus(401)
     }

@@ -1,21 +1,19 @@
 import client from "../../../database/database.js";
-import { checkTokenQuery, postUrlQuery } from "../../../Queries/urlQueries.js";
+import { postUrlQuery } from "../../../Queries/urlQueries.js";
 import { nanoid } from 'nanoid'
+import jwt from "jsonwebtoken";
+import dotenv from 'dotenv'
 
+dotenv.config();
 
 
 export default async function postUrl(req,res){
 
+  const userId = req.userId
   const {url} = req.body;
   const shortUrl = nanoid(10);
-  const { authorization } = req.headers;
-  const token = authorization?.replace('Bearer ', '');
 
-  const {rows: user, rowCount: userCount} = await client.query(checkTokenQuery, [token])
-
-  if(userCount === 0) return res.sendStatus(404)
-
-  const values = [user[0].userId, url, shortUrl]
+  const values = [userId, url, shortUrl]
 
   try {
     await client.query(postUrlQuery, values)

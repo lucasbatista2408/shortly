@@ -3,6 +3,6 @@ CREATE TABLE "shortUrl"(
   "userId" INTEGER REFERENCES "users"("id"),
   "url" TEXT NOT NULL,
   "shortUrl" TEXT NOT NULL,
-  "visitCount" INTEGER,
+  "visitCount" INTEGER NOT NULL DEFAULT 0,
   "createdAt" DATE NOT NULL DEFAULT CURRENT_DATE
 );
