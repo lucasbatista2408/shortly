@@ -1,4 +1,3 @@
-import client from "../../../database/database.js";
 import jwt from "jsonwebtoken";
 import dotenv from 'dotenv'
 

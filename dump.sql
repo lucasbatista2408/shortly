@@ -1,0 +1,1 @@
+sudo -u postgres pg_dump shortly_db > shortly_db
