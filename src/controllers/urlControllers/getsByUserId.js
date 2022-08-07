@@ -1,45 +1,30 @@
 import client from "../../../database/database.js";
+import { getsByUserIdQuery } from "../../../Queries/urlQueries.js";
 
 
 export default async function getsByUserId(req,res){
 
-  
   const userId = req.userId;
   console.log(userId)
 
   const values = [userId]
   console.log(values)
 
-  const query = `SELECT
-  json_build_object(
-  'id', users.id, 
-  'name',users.name, 
-  'visitCount',(SELECT SUM("visitCount") 
- FROM "shortUrl" 
- JOIN users u ON u.id = "shortUrl"."userId"
- GROUP BY "shortUrl"."userId", u.id) ,
-  'shortenedUrls', json_agg(   
-   json_build_object(  
-   'id',"shortUrl".id,
-   'shortUrl',"shortUrl"."shortUrl",
-   'url', "shortUrl".url,
-   'visitCount', "shortUrl"."visitCount"
-  )
-  )
- )
- FROM "shortUrl"
- JOIN users  on "shortUrl"."userId" = users.id
- WHERE users.id = $1
- GROUP BY users.id`
+  try {
+    const {rows: data} = await client.query(getsByUserIdQuery, values)
 
-
-    const {rows: teste} = await client.query(query, values)
-
-    const new_list = []
-    
-    for(const v of teste){
+    const new_list = [] //removes json_build_object
+      
+    for(const v of data){
       new_list.push(v.json_build_object)
     }
-    res.send(new_list)
+      
+    const final_data = new_list[0] // sets data out the array
+    res.send(final_data)
+    
+  } catch (error) {
+    console.error(error)
+    res.sendStatus(500)
+  }
 
 }

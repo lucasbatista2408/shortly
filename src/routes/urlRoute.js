@@ -5,6 +5,7 @@ import getById from '../controllers/urlControllers/getById.js';
 import redirectById from '../controllers/urlControllers/redirectById.js';
 import deleteById from '../controllers/urlControllers/deleteById.js';
 import getsByUserId from '../controllers/urlControllers/getsByUserId.js';
+import getsRanking from '../controllers/urlControllers/getsRanking.js';
 
 const router = Router();
 
@@ -22,5 +23,8 @@ router.delete('/urls/:id', authUrl, deleteById)
 
 // gets all short urls of a userId
 router.get('/users/me', authUrl, getsByUserId)
+
+//gets ranking of urls
+router.get('/ranking', getsRanking)
 
 export default router;
