@@ -3,6 +3,8 @@ import dotenv from "dotenv"
 
 dotenv.config();
 
+const { Pool } = pg;
+
 const databaseConfig = {
   connectionString: process.env.DATABASE_URI,
   ssl: {
@@ -10,9 +12,9 @@ const databaseConfig = {
   }
 }
 
-const client = new Pool(databaseConfig);
+const client = new Pool (databaseConfig);
 
-// const { Pool } = pg;
+
 
 // const user = process.env.USER;
 // const password = process.env.PASSWORD;
