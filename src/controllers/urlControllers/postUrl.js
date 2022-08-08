@@ -13,6 +13,8 @@ export default async function postUrl(req,res){
   const {url} = req.body;
   const shortUrl = nanoid(10);
 
+  if(!url) return res.sendStatus(400)
+
   const values = [userId, url, shortUrl]
 
   try {
