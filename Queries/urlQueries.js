@@ -9,8 +9,8 @@ export  const updateCountQuery = 'UPDATE "shortUrl" SET "visitCount"="visitCount
 export const rankingQuery = `SELECT 
 users.id, 
 users.name, 
-COUNT("shortUrl"."shortUrl") AS "linksCount", 
-SUM("shortUrl"."visitCount") AS "viewCount" 
+CAST (COUNT("shortUrl"."shortUrl") AS INT) AS "linksCount", 
+CAST (SUM("shortUrl"."visitCount") AS INT) AS "viewCount" 
 FROM users JOIN "shortUrl" 
 ON "shortUrl"."userId"=users.id
 GROUP BY users.id
