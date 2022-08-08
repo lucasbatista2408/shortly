@@ -8,6 +8,8 @@ export default async function redirectById(req,res){
 
   const values = [shortUrl]
 
+  if(!shortUrl) return res.sendStatus(400)
+
   try {
     const {rows: data, rowCount} = await client.query(redirectByIdQuery, values);
 

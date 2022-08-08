@@ -8,6 +8,8 @@ export default async function getById(req,res){
 
   const values = [id]
 
+  if(!id) return res.sendStatus(400)
+
   try {
     const {rows: data, rowCount} = await client.query(getByIdQuery, values)
 
