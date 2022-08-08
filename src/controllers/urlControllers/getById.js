@@ -4,7 +4,7 @@ import { getByIdQuery } from "../../../Queries/urlQueries.js";
 
 export default async function getById(req,res){
 
-  const {id} = req.params
+  const {id} = parseInt(req.params);
 
   const values = [id]
 

@@ -4,7 +4,7 @@ import { getByIdQuery } from "../../../Queries/urlQueries.js";
 
 export default async function deleteById(req,res){
   const userId = req.userId
-  const {id} = req.params;
+  const {id} = parseInt(req.params);
 
   if(typeof id !== 'number') return res.sendStatus(400)
 
