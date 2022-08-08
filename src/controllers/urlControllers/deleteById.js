@@ -5,8 +5,9 @@ import { getByIdQuery } from "../../../Queries/urlQueries.js";
 export default async function deleteById(req,res){
   const userId = req.userId
   const {id} = parseInt(req.params);
+  const isInt = parseInt(id)
 
-  if(typeof id !== 'number') return res.sendStatus(400)
+  if(typeof isInt !== 'number') return res.sendStatus(400)
 
   const {rowCount} = await client.query(getByIdQuery, [id])
 

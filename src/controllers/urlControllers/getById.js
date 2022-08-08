@@ -4,12 +4,12 @@ import { getByIdQuery } from "../../../Queries/urlQueries.js";
 
 export default async function getById(req,res){
 
-  const {id} = parseInt(req.params);
-  console.log(typeof id, id)
+  const {id} = req.params;
+  const isInt = parseInt(id)
 
   const values = [id]
 
-  if(typeof id !== 'number') return res.sendStatus(400)
+  if(typeof isInt !== 'number') return res.sendStatus(400)
 
   if(!id) return res.sendStatus(400)
 
