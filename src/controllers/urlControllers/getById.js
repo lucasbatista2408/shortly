@@ -8,6 +8,8 @@ export default async function getById(req,res){
 
   const values = [id]
 
+  if(typeof id !== 'number') return res.sendStatus(400)
+
   if(!id) return res.sendStatus(400)
 
   try {

@@ -6,6 +6,8 @@ export default async function deleteById(req,res){
   const userId = req.userId
   const {id} = req.params;
 
+  if(typeof id !== 'number') return res.sendStatus(400)
+
   const {rowCount} = await client.query(getByIdQuery, [id])
 
   if(rowCount === 0) return res.sendStatus(404)
